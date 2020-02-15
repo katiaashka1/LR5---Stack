@@ -11,13 +11,31 @@ using std::cout;
 using std::endl;
 
 template <typename T>
-class stack
+class stack_st
 {
 private:
     T *stackPtr;    // указатель на стек
     int count;      // размер стека (количество элементов в стеке)
 
 public:
+    template <typename ... Args>
+    void push_emplace(Args&&... value) {
+        cout << "Переменная" << endl;
+        T* tmpPtr;             // временный указатель
+        tmpPtr = stackPtr;     // указатель указывает на arrStack
+        stackPtr = new T[count + 1];    // выделить память на 1 элемент больше, чем было выделено до этого
+        count++;            // увеличить количество элементов в стеке на 1
+
+        for (int i = 0; i < count - 1; i++) {
+            stackPtr[i] = tmpPtr[i];   // скопировать данные из памяти, на которую указывает tmp в память, на которую указывает arrStack
+        }
+
+        T tmp(value...);
+        stackPtr[count - 1] = tmp;    // добавить последний элемент
+
+        if (count > 1) delete[] tmpPtr;    // освободить память, удалить tmp
+    }
+
     stack() {       // конструктор
         stackPtr = nullptr;
         count = 0;
@@ -42,26 +60,13 @@ public:
         if (count > 1) delete[] tmpPtr;    // освободить память, удалить tmp
     }
 
-    void push(const T& value) {
-        cout << "Переменная" << endl;
-        T* tmpPtr;             // временный указатель
-        tmpPtr = stackPtr;     // указатель указывает на arrStack
-        stackPtr = new T[count + 1];    // выделить память на 1 элемент больше, чем было выделено до этого
-        count++;            // увеличить количество элементов в стеке на 1
-
-        for (int i = 0; i < count - 1; i++) {
-            stackPtr[i] = tmpPtr[i];   // скопировать данные из памяти, на которую указывает tmp в память, на которую указывает arrStack
-        }
-        stackPtr[count - 1] = value;    // добавить последний элемент
-
-        if (count > 1) delete[] tmpPtr;    // освободить память, удалить tmp
-    }
-
-    void pop() {
+    T pop() {
         if (count == 0) {
             cout << "stack underflow" << endl;
             exit(STACK_UNDERFLOW);
         }
+
+        T ret = stackPtr[count - 1];
 
         T *tmpPtr;             // временный указатель
         tmpPtr = stackPtr;     // указатель указывает на arrStack
@@ -73,6 +78,7 @@ public:
         }
 
         if (count > 1) delete[] tmpPtr;    // освободить память, удалить tmp
+        return ret;
     }
 
     const T& head() const {
