@@ -29,14 +29,13 @@ public:
     }
 
     void push(T&& value) {
-        cout << "Значение" << endl;
         T* tmpPtr;             // временный указатель
         tmpPtr = stackPtr;     // указатель указывает на arrStack
-        stackPtr = new T[count + 1];    // выделить память на 1 элемент больше, чем было выделено до этого
+        stackPtr = new T[count + 1];
         count++;            // увеличить количество элементов в стеке на 1
 
         for (int i = 0; i < count - 1; i++) {
-            stackPtr[i] = tmpPtr[i];   // скопировать данные из памяти, на которую указывает tmp в память, на которую указывает arrStack
+            stackPtr[i] = tmpPtr[i];
         }
         stackPtr[count - 1] = value;    // добавить последний элемент
 
@@ -44,14 +43,13 @@ public:
     }
 
     void push(const T& value) {
-        cout << "Переменная" << endl;
         T* tmpPtr;             // временный указатель
         tmpPtr = stackPtr;     // указатель указывает на arrStack
-        stackPtr = new T[count + 1];    // выделить память на 1 элемент больше, чем было выделено до этого
-        count++;            // увеличить количество элементов в стеке на 1
+        stackPtr = new T[count + 1];
+        count++;
 
         for (int i = 0; i < count - 1; i++) {
-            stackPtr[i] = tmpPtr[i];   // скопировать данные из памяти, на которую указывает tmp в память, на которую указывает arrStack
+            stackPtr[i] = tmpPtr[i];
         }
         stackPtr[count - 1] = value;    // добавить последний элемент
 
@@ -59,24 +57,10 @@ public:
     }
 
     T pop() {
-        if (count == 0) {
-            cout << "stack underflow" << endl;
-            exit(STACK_UNDERFLOW);
-        }
-
-        T ret = stackPtr[count - 1];
-
-        T *tmpPtr;             // временный указатель
-        tmpPtr = stackPtr;     // указатель указывает на arrStack
-        stackPtr = new T[count - 1];    // выделить память на 1 элемент меньше, чем было выделено до этого
-        count--;            // уменьшить количество элементов в стеке на 1
-
-        for (int i = 0; i < count - 1; i++) {
-            stackPtr[i] = tmpPtr[i];   // скопировать данные из памяти, на которую указывает tmp в память, на которую указывает arrStack
-        }
-
-        if (count > 1) delete[] tmpPtr;    // освободить память, удалить tmp
-        return ret;
+        if (count == 0)
+            return 0; // стек пуст
+        count--;
+        return stackPtr[count];
     }
 
     const T& head() const {
