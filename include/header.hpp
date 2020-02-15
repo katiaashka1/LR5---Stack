@@ -58,11 +58,13 @@ public:
         if (count > 1) delete[] tmpPtr;    // освободить память, удалить tmp
     }
 
-    void pop() {
+    T pop() {
         if (count == 0) {
             cout << "stack underflow" << endl;
             exit(STACK_UNDERFLOW);
         }
+
+        T ret = stackPtr[count - 1];
 
         T *tmpPtr;             // временный указатель
         tmpPtr = stackPtr;     // указатель указывает на arrStack
@@ -74,6 +76,7 @@ public:
         }
 
         if (count > 1) delete[] tmpPtr;    // освободить память, удалить tmp
+        return ret;
     }
 
     const T& head() const {
