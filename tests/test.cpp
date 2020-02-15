@@ -4,15 +4,7 @@
 #include "header.hpp"
 #include "header2.hpp"
 
-class summ{
-public:
-    summ();
-    summ(int a, int b, int c)
-    {
-        rez = a+b+c;
-    }
-    int rez;
-};
+
 
 TEST(stack, Text){
 stack<int> test;
@@ -34,14 +26,14 @@ EXPECT_EQ(test.pop(), 2);
 }
 
 TEST(stack_t, Text){
-    stack_st<summ> test_summ;
     stack_st<int> test;
-    test_summ.push_emplace(1);
-    test_summ.push_emplace(3);
+    test.push_emplace(1);
+    test.push_emplace(3);
     test.push(2);
     test.push(3);
     test.push(4);
     test.push(12);
+
     EXPECT_EQ(std::is_move_assignable<stack_st<int>>::value, true);
     EXPECT_EQ(std::is_move_constructible<stack_st<int>>::value, true);
 
@@ -50,8 +42,8 @@ TEST(stack_t, Text){
     EXPECT_EQ(test.pop(), 4);
     EXPECT_EQ(test.pop(), 3);
     EXPECT_EQ(test.pop(), 2);
-    EXPECT_EQ(test_summ.pop().rez, 12);
-    EXPECT_EQ(test_summ.pop().rez, 6);
+    EXPECT_EQ(test.pop(), 3);
+    EXPECT_EQ(test.pop(), 1);
 }
 
 int main(int argc, char **argv) {
