@@ -28,6 +28,14 @@ public:
         delete[] stackPtr;  // удаляем стек
     }
 
+    template <typename ... Args>
+    void push_emplace(Args &&... value) {
+        for (auto t : std::initializer_list<T>{ value... })
+        {
+            push(t);
+        }
+   }
+
     void push(T&& value) {
         T* tmpPtr;             // временный указатель
         tmpPtr = stackPtr;     // указатель указывает на arrStack
