@@ -28,7 +28,6 @@ EXPECT_EQ(test.pop(), 2);
 TEST(stack_t, Text){
     stack_st<int> test;
     test.push_emplace(1);
-    test.push_emplace(3);
     test.push(2);
     test.push(3);
     test.push(4);
@@ -42,7 +41,6 @@ TEST(stack_t, Text){
     EXPECT_EQ(test.pop(), 4);
     EXPECT_EQ(test.pop(), 3);
     EXPECT_EQ(test.pop(), 2);
-    EXPECT_EQ(test.pop(), 3);
     EXPECT_EQ(test.pop(), 1);
 }
 
