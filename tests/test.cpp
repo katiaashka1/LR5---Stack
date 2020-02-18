@@ -11,14 +11,12 @@ TEST(stack, Text) {
     test.push(b);
     test.push(c);
     test.push(12);
-    test.push_emplace(15, 17, 20);
+    test.push_emplace(15);
 
     EXPECT_EQ(std::is_move_assignable<stack<int>>::value, true);
     EXPECT_EQ(std::is_move_constructible<stack<int>>::value, true);
 
-    EXPECT_EQ(test.head(), 20);
-    EXPECT_EQ(test.pop(), 20);
-    EXPECT_EQ(test.pop(), 17);
+    EXPECT_EQ(test.head(), 15);
     EXPECT_EQ(test.pop(), 15);
     EXPECT_EQ(test.pop(), 12);
     EXPECT_EQ(test.pop(), 4);
