@@ -40,7 +40,7 @@ public:
         stackPtr = new T[count + 1];
         count++;            // увеличить количество элементов в стеке на 1
 
-        for (int i = 0; i < count - 1; i++) {
+        for (int i = 0; i < count - 1; ++i) {
             stackPtr[i] = tmpPtr[i];
         }
         stackPtr[count - 1] = value;    // добавить последний элемент
@@ -54,7 +54,7 @@ public:
         stackPtr = new T[count + 1];
         count++;
 
-        for (int i = 0; i < count - 1; i++) {
+        for (int i = 0; i < count - 1; ++i) {
             stackPtr[i] = tmpPtr[i];
         }
         stackPtr[count - 1] = value;    // добавить последний элемент
@@ -71,7 +71,7 @@ public:
 
     const T& head() const {
         if (count == 0) {
-            cout << "stack underflow" << endl;
+            cout << "Stack underflow" << endl;
             exit(STACK_UNDERFLOW);
         }
         return stackPtr[count-1];
